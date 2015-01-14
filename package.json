@@ -1,0 +1,33 @@
+{
+  "name": "timetravel",
+  "version": "0.1.0",
+  "description": "A simple clock for simulations",
+  "main": "lib/timetravel.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbock/timetravel"
+  },
+  "keywords": [
+    "simulation",
+    "simulated",
+    "clock",
+    "time"
+  ],
+  "author": "Philipp Bock",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pbock/timetravel/issues"
+  },
+  "homepage": "https://github.com/pbock/timetravel",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "chai-stats": "^0.3.0",
+    "mocha": "^2.1.0"
+  }
+}
