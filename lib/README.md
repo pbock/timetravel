@@ -11,7 +11,7 @@ A tiny module that simulates time in JavaScript.
 
 _Timetravel_ works as a general-purpose counter that increments by a set amount each millisecond. It can be set, sped up, paused and restarted. There are no “moving parts”; the time is only calculated when needed. While you’re not using it, the clock does absolutely nothing.
 
-_Timetravel_ is tiny (1 KB minified), fully tested, and works just about anywhere. You can `require` it Node or AMD style or embed it the old-fashioned way with a `<script>` tag.
+_Timetravel_ is tiny (1.5 KB minified), fully tested, has no dependencies, and works just about anywhere. You can `require` it Node- or AMD-style or embed it the old-fashioned way with a `<script>` tag.
 
 ## Is _Timetravel_ right for me?
 
