@@ -17,10 +17,31 @@ describe('Clock', function () {
 	});
 
 	describe('constructor', function () {
-		it('Should return a clock', function () {
-			expect(new Clock()).to.be.an.instanceof(Clock);
+		it('Should return a running clock', function () {
+			expect(clock).to.be.an.instanceof(Clock);
+			expect(clock.isRunning()).to.be.ok();
 		});
-		it('Should accept time, speed, earliest, and latest options');
+		it('should be set to the current time by default', function () {
+			expect(clock.time()).to.be.closeTo(Date.now(), 1);
+		});
+		it('should have speed=1 and no bounds by default', function () {
+			expect(clock.speed()).to.equal(1);
+			expect(clock.earliest()).to.equal(-Infinity);
+			expect(clock.latest()).to.equal(Infinity);
+		});
+		it('Should accept time, speed, earliest, and latest options', function () {
+			var options = {
+				time: 1 + Math.random(),
+				earliest: Math.random(),
+				latest: 2 + Math.random(),
+				speed: Math.random()
+			}
+			clock = new Clock(options).stop();
+			expect(clock.time()).to.equal(options.time);
+			expect(clock.earliest()).to.equal(options.earliest);
+			expect(clock.latest()).to.equal(options.latest);
+			expect(clock.start().speed()).to.equal(options.speed);
+		});
 	});
 	describe('#speed', function () {
 		it('should return a number when called without arguments', function () {
@@ -126,37 +147,75 @@ describe('Clock', function () {
 			expect(clock.start().isRunning()).to.equal(true);
 		});
 	});
-	describe('#set', function () {
-		it('should be chainable', function () {
-			expect(clock.set(0)).to.equal(clock);
-		});
-		it('should set the clock\'s time');
-		it('should accept anything that responds to valueOf');
-	});
-	describe('#get', function () {
-		it('should return the clock\'s time');
-		it('should return a number', function () {
-			expect(clock.get()).to.be.a('number');
-			expect(clock.get()).not.to.equal(NaN);
-		});
-	});
 	describe('#time', function () {
-		it('should do the same as #get without arguments');
-		it('should do the same as #set with arguments');
+		it('should be overloaded', function () {
+			var time = Math.random();
+			clock.time(time);
+			expect(clock.time()).to.be.closeTo(time, tolerance);
+		});
+		describe('the getter (with no argument)', function () {
+			it('should return the clock\'s time', function (done) {
+				var startTime = clock.time();
+				expect(clock.time()).to.be.closeTo(startTime, tolerance);
+				setTimeout(function () {
+					expect(clock.time()).to.be.closeTo(startTime + 50, tolerance);
+					done();
+				}, 50);
+			});
+			it('should return a number', function () {
+				expect(clock.time()).to.be.a('number');
+				expect(clock.time()).not.to.equal(NaN);
+			});
+		});
+		describe('the setter (with one argument)', function () {
+			it('should be chainable', function () {
+				expect(clock.time(0)).to.equal(clock);
+			});
+			it('should set the clock\'s time', function () {
+				var time = Math.random();
+				expect(clock.time(time).time()).to.equal(time);
+			});
+			it('should accept anything that responds to valueOf', function () {
+				var date = new Date(42);
+				var object = { valueOf: function () { return 42; } };
+				var number = 42;
+				var string = '42';
+				expect(new Clock().stop().time(date).time()).to.equal(42);
+				expect(new Clock().stop().time(object).time()).to.equal(42);
+				expect(new Clock().stop().time(number).time()).to.equal(42);
+				expect(new Clock().stop().time(string).time()).to.equal(42);
+			});
+		});
 	});
 	describe('#earliest', function () {
 		it('should be chainable', function () {
 			expect(clock.earliest(0)).to.equal(clock);
 		});
-		it('should be overloaded');
-		it('should set the lower bound of the clock');
+		it('should be overloaded', function () {
+			var value = Math.random();
+			clock.earliest(value);
+			expect(clock.earliest()).to.equal(value);
+		});
+		it('should set the lower bound of the clock', function () {
+			var value = Math.random();
+			clock.earliest(value);
+			expect(clock.stop().time(value - 1000).time()).to.equal(value);
+		});
 	});
 	describe('#latest', function () {
 		it('should be chainable', function () {
 			expect(clock.latest(0)).to.equal(clock);
 		});
-		it('should be overloaded');
-		it('should set the upper bound of the clock');
+		it('should be overloaded', function () {
+			var value = Math.random();
+			clock.latest(value);
+			expect(clock.latest()).to.equal(value);
+		});
+		it('should set the upper bound of the clock', function () {
+			var value = Math.random();
+			clock.latest(value);
+			expect(clock.stop().time(value + 1000).time()).to.equal(value);
+		});
 	});
 	describe('#on', function () {
 		it('should be chainable', function () {
