@@ -10,6 +10,8 @@ var expect = chai.expect;
 
 var tolerance = 5;
 
+/* global describe, it, beforeEach */
+
 describe('Clock', function () {
 	var clock;
 	beforeEach(function () {
@@ -35,7 +37,7 @@ describe('Clock', function () {
 				earliest: Math.random(),
 				latest: 2 + Math.random(),
 				speed: Math.random()
-			}
+			};
 			clock = new Clock(options).stop();
 			expect(clock.time()).to.equal(options.time);
 			expect(clock.earliest()).to.equal(options.earliest);
@@ -84,7 +86,7 @@ describe('Clock', function () {
 			clock.speed(initialSpeed);
 			changeCount++;
 			clock.speed(2 * initialSpeed);
-		})
+		});
 	});
 	describe('#stop', function () {
 		it('should be chainable', function () {
