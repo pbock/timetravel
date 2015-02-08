@@ -2,7 +2,7 @@
   "name": "timetravel",
   "version": "0.1.0",
   "authors": [
-    "Philipp Bock <p@philippbock.de>"
+    "Philipp Bock <p@philippbock.de> (http://philippbock.de)"
   ],
   "description": "A simple clock for simulations",
   "main": "dist/timetravel.min.js",

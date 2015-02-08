@@ -19,7 +19,7 @@
     "clock",
     "time"
   ],
-  "author": "Philipp Bock",
+  "author": "Philipp Bock <p@philippbock.de> (http://philippbock.de)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pbock/timetravel/issues"
