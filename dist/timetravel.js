@@ -51,7 +51,7 @@ var undefined; // jshint ignore:line
 var Clock = function (options) { // jshint ignore:line
 
 // Act as a factory when called directly
-if (this.Clock) {
+if (!this || this.Clock) {
 	return new Clock(options);
 }
 var me = this;

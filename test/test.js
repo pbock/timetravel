@@ -15,7 +15,7 @@ var tolerance = 5;
 describe('Clock', function () {
 	var clock;
 	beforeEach(function () {
-		clock = new Clock();
+		clock = Clock();
 	});
 
 	describe('constructor', function () {
